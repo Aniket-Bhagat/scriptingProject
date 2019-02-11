@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %} 
+{% from "includes/_formhelpers.html" import render_field%} 
+
+{% if requiredValuesMissing %}
+	<div class="alert alert-danger">
+		Please fill all the values.
+	</div>
+{% endif %}
+
+<div class="container pt-3 mb-5">
+	<div class="row justify-content-sm-center">
+		<div class="col-sm-8 col-md-6">
+
+			<div class="card border-info text-auto">
+				<div class="card-header text-center">Create New account</div>
+				<div class="card-body">
+					<form class="form-register" method="POST" action="#" role="form">
+						{{ form.csrf }}
+						<label for="name">Name :</label>
+						<input type="text" name="name" class="form-control" id="name" placeholder="FirstName LastName" required autofocus>
+						{% if usernameExists %}
+							<small class="text-danger align-middle">User already registered</small>
+						{% endif %}<br>
+
+						<label for="email">Your email :</label>
+						<input type="text" name="email" class="form-control" id="email" placeholder="you@example.com" required autofocus>
+						{% if emailExists %}
+							<small class="text-danger align-middle">An account already exists with this email address.</small>
+						{% endif %}<br>
+
+						<label for="username">Username :</label>
+						<input type="text" name="username" class="form-control" id="username" placeholder="UserName" required autofocus><br>
+
+						<label for="password">Password :</label>
+						<input type="password" name="password" class="form-control" id="password" placeholder="Password" required autofocus><br>
+
+						<label for="confirmpass">Confirm Password :</label>
+						<input type="password" name="confirmpass" class="form-control" id="confirmpass" placeholder="Password" required autofocus><br>
+
+						<button type="submit" class="btn btn-success btn-block mb-1"><i class="fa fa-user-plus"></i>&nbsp<b>Register</b></button>
+
+          </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

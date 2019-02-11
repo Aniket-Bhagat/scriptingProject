@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}    
+<div class="container mt-3" style="min-height: 545px">
+    {% if nomatches %}
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="card-body row no-gutters align-items-center">
+            <div class="col-auto">
+              No matches found..
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      {% for question in titles.keys() %}
+  <div class="card"  style="text-align: left;">
+        <div class="card-header">
+          <h4 class="card-title my-0">
+            <a href="/question/{{links[question]}}" style="text-decoration: none;">{{titles[question]}}</a>
+          </h4>
+        </div>
+        <div class="card-body">
+          <h6>
+            {% if body[question].split()|length > 25 %}
+              {{ " ".join((body[question].split())[:25]) }}
+            {% else %}
+              {{ body[question] }}
+            {% endif %}
+          </h6>
+          {% for tag in tags[question] %}
+            <a href="/search_by_tag/{{tag.body}}"><small>{{tag.body}}</small></a>
+          {% endfor %}
+        </div>
+  </div>
+  <br>
+      {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

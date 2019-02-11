@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if not session or not session.loggedin %}
+<div class="jumbotron p-5 mb-0 jumbotron-fluid" style="background-image: url(/static/images/jumbo.jpg); background-size: cover;">
+	<div class="container row">
+	<div class="col-md-8 text-center">
+		<img src="/static/images/IIITHLogo.png">
+		<h1 class="text-light" style="text-shadow: 2px 2px 4px #000000">Question & Answer web platform</h1>
+		<p class="text-light">Scripting & Computer Environment Course Project 2018</p>
+	</div>
+	<hr>
+	<div class="card border-info text-center col-md-3 shadow rounded" style="background: none">
+		<div class="card-header text-light"><b>Sign in to your account</b></div>
+		<div class="card-body">
+			<form class="form-signin" method="POST" action="/login">
+				<input type="email" class="form-control mb-2" name="email" id="email" aria-describedby="emailHelp" placeholder="Your email" value="{{request.form.username}}">
+				<input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" value="{{request.form.password}}">
+				<button class="btn btn-md btn-primary btn-block mb-1" type="submit"><b>Sign in</b></button>
+				<a class="text-light">or</a>
+				<a class="btn btn-success btn-block mb-1" href="/register" ><i class="fa fa-user-plus"></i>&nbsp<b>Sign Up</b></a>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+{% endif %}
+<br>
+
+<div class="container">
+	<div class="text-center">
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item"><a class="nav-link active"  data-toggle="tab" href="/index"><b>All</b></a></li>
+			<li class="nav-item"><a class="nav-link"  data-toggle="tab"  href="/index"><b>Unanswered</b></a></li>
+			<li class="nav-item"><a class="nav-link"  data-toggle="tab"  href="/index"><b>Answered</b></a></li>
+			<li class="nav-item" data-toggle="modal" data-target="#myModal"><a class="nav-link"  data-toggle="tab"  href="/search_by_tag"><b>Search By Tags</b></a></li>
+		</ul>
+	</div>
+	{% include "questionLink.html" %}
+</div>
+
+{% endblock %}

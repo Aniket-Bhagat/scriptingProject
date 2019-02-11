@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if loginfailed %}
+	<div class="alert alert-danger text-center">
+		Incorrect login credentials. Try to login again.
+	</div>
+{% endif %}
+
+{% if registrationFlow %}
+	<div class="alert alert-success text-center">
+		Registration successful. You can now log in.
+	</div>
+{% endif %}
+<br>
+
+<div class="container pt-3">
+  <div class="row justify-content-sm-center">
+	<div class="col-sm-6 col-md-4">
+
+	  <div class="card border-info text-center">
+		<div class="card-header">Sign in to your account</div>
+		<div class="card-body">
+			<img src="/static/images/IIITHLogo.png" style="height: 180px; padding: 0px; width: 100%;">
+			<hr>
+			<form class="form-signin" method="POST" action="/login">
+				<input type="email" class="form-control mb-2" name="email" id="email" aria-describedby="emailHelp" placeholder="Your email" value="{{request.form.username}}">
+				<input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" value="{{request.form.password}}">
+				<button class="btn btn-md btn-primary btn-block mb-1" type="submit">Sign in</button>
+				<label class="checkbox float-left">
+					<input type="checkbox" value="remember-me">
+					Remember me
+				</label>
+				<a href="#" class="float-right">Need help?</a>
+		  </form>
+		</div>
+	  </div>
+	  <a href="/register" class="float-right">Create an account </a>
+	</div>
+  </div>
+</div>
+<br>
+
+{% endblock %}
